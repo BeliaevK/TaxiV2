@@ -25,16 +25,16 @@ public class OrderReader {
         Order order = null;
         boolean isCorrectOrder = false;
         while (!isCorrectOrder) {
-            String s = reader.readLine();
-            String[] sSplit = s.split("\\|");
-            if (checkOrderFieldsIsCorrect(sSplit)) {
-                if (sSplit.length == 2) {
-                    order = new Order(sSplit[0], sSplit[1], false, false, 0);
+            String orderText = reader.readLine();
+            String[] orderField = orderText.split("\\|");
+            if (checkOrderFieldsIsCorrect(orderField)) {
+                if (orderField.length == 2) {
+                    order = new Order(orderField[0], orderField[1], false, false, 0);
             } else
                     try {
-                        if (sSplit.length == 5)
-                            order = new Order(sSplit[0], sSplit[1], Boolean.parseBoolean(sSplit[2]), Boolean.parseBoolean(sSplit[3]),
-                                    Integer.parseInt(sSplit[4]));
+                        if (orderField.length == 5)
+                            order = new Order(orderField[0], orderField[1], Boolean.parseBoolean(orderField[2]), Boolean.parseBoolean(orderField[3]),
+                                    Integer.parseInt(orderField[4]));
                     }catch (NumberFormatException e){
                         System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
                                 "\n 2) Начальная улица|Конечная улица|0|0|0");
@@ -47,14 +47,11 @@ public class OrderReader {
         }
         return order;
     }
-    private static boolean checkOrderFieldsIsCorrect(String[] sSplit) {
+    private static boolean checkOrderFieldsIsCorrect(String[] orderText) {
         boolean isCorrect = true;
-        if (sSplit.length < 1) isCorrect = false;
-        if (sSplit.length == 3) isCorrect = false;
-        if (sSplit.length == 4) isCorrect = false;
+        if (orderText.length < 1 | orderText.length == 3 | orderText.length == 4) isCorrect = false;
         try {
-            if (sSplit[0].length() == 0) isCorrect = false;
-            if (sSplit[1].length() == 0) isCorrect = false;
+            if (orderText[0].length() == 0 | orderText[1].length() == 0) isCorrect = false;
         } catch (NumberFormatException e) {
             isCorrect = false;
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -6,10 +6,22 @@ package ru.GoldTaxi.Entities;
 public class Driver {
     private String name;
     private String telephone;
+    private String driverStatus;
+    private static final String TYPE_OF_DRIVER_STATUS_FREE = "Свободен";
+    private static final String TYPE_OF_DRIVER_STATUS_RESERVED = "Занят";
 
-    public Driver (String name, String telephone){
+    public Driver (String name, String telephone, String driverStatus){
         this.name = name;
         this.telephone = telephone;
+        this.setDriverStatus(driverStatus);
+    }
+
+    public static String getTypeOfDriverStatusFree() {
+        return TYPE_OF_DRIVER_STATUS_FREE;
+    }
+
+    public static String getTypeOfDriverStatusReserved() {
+        return TYPE_OF_DRIVER_STATUS_RESERVED;
     }
 
     public String getName() {
@@ -27,4 +39,20 @@ public class Driver {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    public String getDriverStatus() {
+        return driverStatus;
+    }
+
+    public void setDriverStatus(String driverStatus) {
+        this.driverStatus = driverStatus;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ", телефон для связи: " + this.telephone;
+    }
+
+
+
 }

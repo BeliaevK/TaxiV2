@@ -9,30 +9,37 @@ import java.util.ArrayList;
  * Created by Scala on 13.11.2016.
  */
 public class CarSearch {
-    public static void searchFreeCar(ArrayList<Car> carArrayList, Order order) {
+
+    private static CarSearch instance;
+
+    public static CarSearch getInstance() {
+        if (instance == null) {
+            instance = new CarSearch();
+        }
+        return instance;
+    }
+
+    public static Car searchFreeCar(ArrayList<Car> carArrayList, Order order) {
         Car reservedCar = null;
         for (Car car : carArrayList) {
             if (CarSearch.compareOrderToCar(car, order)) {
                 reservedCar = car;
-                reservedCar.setCarStatus(Car.getTypeOfStatusReserved());
+                reservedCar.setCarStatus(Car.getTypeOfCarStatusReserved());
                 order.setCarReserver(reservedCar);
                 break;
             }
         }
-        if (reservedCar != null) {
-            System.out.println("Вам назначена: "+reservedCar);
+        if (reservedCar == null) {
+            return null;
         } else {
-            System.out.println("В данный момент нет подходящего автомобиля, попробуйте позже.");
+            return reservedCar;
         }
     }
 
     private static boolean compareOrderToCar(Car car, Order order) {
         boolean isSuitCar = true;
-        if (Car.getTypeOfStatusReserved().equals(car.getCarStatus()) | !(car.isBabySeat() == order.isNeedBabySeat()) |
+        if (Car.getTypeOfCarStatusReserved().equals(car.getCarStatus()) | !(car.isBabySeat() == order.isNeedBabySeat()) |
                 !(car.isSmoking() == order.isNeedSmoking()) | !(car.getCarClass() == order.getNeedCarClass())) isSuitCar = false;
-/*        if (!(car.isBabySeat() == order.isNeedBabySeat())) isSuitCar = false;
-        if (!(car.isSmoking() == order.isNeedSmoking())) isSuitCar = false;
-        if (!(car.getCarClass() == order.getNeedCarClass())) isSuitCar = false;*/
         return isSuitCar;
     }
 }

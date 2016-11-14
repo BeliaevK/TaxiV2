@@ -10,6 +10,7 @@ public class Order {
     private boolean needSmoking;
     private int needCarClass;
     private Car carReserver;
+    private Driver driverReserver;
 
     public Order (String startPoint, String endPoint, boolean needBabySeat, boolean needSmoking, int needCarClass) {
         this.startPoint = startPoint;
@@ -65,5 +66,13 @@ public class Order {
 
     public void setCarReserver(Car carReserver) {
         this.carReserver = carReserver;
+    }
+
+    public Driver getDriverReserver() {
+        return driverReserver;
+    }
+
+    public void setDriverReserver(Driver driverReserver) {
+        this.driverReserver = driverReserver;
     }
 }
