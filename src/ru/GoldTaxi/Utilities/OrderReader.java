@@ -28,25 +28,30 @@ public class OrderReader {
             String orderText = reader.readLine();
             String[] orderField = orderText.split("\\|");
             if (checkOrderFieldsIsCorrect(orderField)) {
-                if (orderField.length == 2) {
-                    order = new Order(orderField[0], orderField[1], false, false, 0);
-            } else
-                    try {
-                        if (orderField.length == 5)
-                            order = new Order(orderField[0], orderField[1], Boolean.parseBoolean(orderField[2]), Boolean.parseBoolean(orderField[3]),
-                                    Integer.parseInt(orderField[4]));
-                    }catch (NumberFormatException e){
-                        System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
-                                "\n 2) Начальная улица|Конечная улица|0|0|0");
+                try {
+                    switch (orderField.length) {
+                        case 2:
+                            order = new Order(orderField[0], orderField[1], false, false, 0);
+                            break;
+                        case 5:
+                            order = new Order(orderField[0], orderField[1], Boolean.parseBoolean(orderField[2]),
+                                    Boolean.parseBoolean(orderField[3]), Integer.parseInt(orderField[4]));
+                            break;
                     }
-            } else {
-                System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
-                        "\n 2) Начальная улица|Конечная улица|0|0|0");
+                } catch (NumberFormatException e) {
+                    System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
+                            "\n 2) Начальная улица|Конечная улица|0|0|0");
+                }
             }
-            if (order != null) isCorrectOrder = true;
-        }
-        return order;
-    }
+                     else {
+                            System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
+                                    "\n 2) Начальная улица|Конечная улица|0|0|0");
+                        }
+                        if (order != null) isCorrectOrder = true;
+                    }
+                    return order;
+                }
+
     private static boolean checkOrderFieldsIsCorrect(String[] orderText) {
         boolean isCorrect = true;
         if (orderText.length < 1 | orderText.length == 3 | orderText.length == 4) isCorrect = false;

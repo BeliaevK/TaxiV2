@@ -16,16 +16,13 @@ import java.util.ArrayList;
  */
 public class main {
     public static void main(String[] args) throws IOException {
-        Initialization.getInstance();
-        OrderReader.getInstance();
-        CarSearch.getInstance();
-        DriverSearch.getInstance();
-        ArrayList<Car> carArrayList = Initialization.initCarArray();
-        ArrayList<Driver> driverArrayList = Initialization.initDriverArray();
+        Initialization initialization = Initialization.getInstance();
+        ArrayList<Car> carArrayList = initialization.initCarArray();
+        ArrayList<Driver> driverArrayList = initialization.initDriverArray();
         while (true) {
-            Order order = OrderReader.orderRead();
-            Car reservedCar = CarSearch.searchFreeCar(carArrayList, order);
-            Driver reservedDriver = DriverSearch.searchFreeDiver(driverArrayList, order);
+            Order order = OrderReader.getInstance().orderRead();
+            Car reservedCar = CarSearch.getInstance().searchFreeCar(carArrayList, order);
+            Driver reservedDriver = DriverSearch.getInstance().searchFreeDiver(driverArrayList, order);
             if (reservedCar == null | reservedDriver == null){
                System.out.println("В данный момент нет подходящего автомобиля, попробуйте позже.");
             } else {
