@@ -8,15 +8,14 @@ import ru.GoldTaxi.Utilities.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Scala on 13.11.2016.
  */
 public class main {
     public static void main(String[] args) throws IOException {
-
-        Locale locale = MyLocale.getLocale();
-     //   ResourceBundle resourceBundle = MyResourseBundle.getBundle();
+        MyResourseBundle myBundle = new MyResourseBundle(MyLocale.getLocale(MyLocale.findLocale()));
         Initialization initialization = Initialization.getInstance();
         ArrayList<Car> carArrayList = initialization.initCarArray();
         ArrayList<Driver> driverArrayList = initialization.initDriverArray();
@@ -25,9 +24,9 @@ public class main {
             Car reservedCar = CarSearch.getInstance().searchFreeCar(carArrayList, order);
             Driver reservedDriver = DriverSearch.getInstance().searchFreeDiver(driverArrayList, order);
             if (reservedCar == null | reservedDriver == null){
-               System.out.println(MyResourseBundle.getBundle().getString("notfoundcar"));
+               System.out.println(myBundle.getValue("notfoundcar"));
             } else {
-            System.out.println(MyResourseBundle.getBundle().getString("appointed") + ": "+ reservedCar + ", " + reservedDriver);
+            System.out.println(myBundle.getValue("appointed") + ": "+ reservedCar + ", " + reservedDriver);
             }
         }
     }

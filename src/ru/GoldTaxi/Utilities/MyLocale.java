@@ -10,10 +10,14 @@ import java.util.Locale;
  */
 public class MyLocale {
 
-    public static Locale getLocale() throws IOException {
+    public static String findLocale() throws IOException {
         System.out.println("Select your language: 'en' or 'ru'");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String s =reader.readLine();
+        return s;
+    }
+
+    public static Locale getLocale(String s) throws IOException {
         if (s.equals("en"))
             return new Locale("en","Us");
         else if (s.equals("ru")) {
@@ -21,4 +25,6 @@ public class MyLocale {
         }
     return null;
     }
+
+
 }

@@ -6,21 +6,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static ru.GoldTaxi.Utilities.MyLocale.*;
+
 /**
  * Created by Scala on 13.11.2016.
  */
 public class OrderReader {
 
     private static OrderReader instance;
+    MyResourseBundle myBundle = new MyResourseBundle(getLocale(findLocale()));
 
-    public static OrderReader getInstance() {
+    public OrderReader() throws IOException {
+    }
+
+
+    public static OrderReader getInstance() throws IOException {
         if (instance == null) {
             instance = new OrderReader();
         }
         return instance;
     }
 
-    public static Order orderRead() throws IOException {
+    public  Order orderRead() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Order order = null;
         boolean isCorrectOrder = false;
@@ -39,13 +46,11 @@ public class OrderReader {
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
-                            "\n 2) Начальная улица|Конечная улица|0|0|0");
+                    System.out.println(myBundle.getValue("appointed"));
                 }
             }
                      else {
-                            System.out.println("Неверный формат заявки. Пример: \n 1) Начальная улица|Конечная улица " +
-                                    "\n 2) Начальная улица|Конечная улица|0|0|0");
+                            System.out.println(myBundle.getValue("appointed"));
                         }
                         if (order != null) isCorrectOrder = true;
                     }

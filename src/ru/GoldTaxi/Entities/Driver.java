@@ -1,5 +1,10 @@
 package ru.GoldTaxi.Entities;
 
+import ru.GoldTaxi.Utilities.MyLocale;
+import ru.GoldTaxi.Utilities.MyResourseBundle;
+
+import java.io.IOException;
+
 /**
  * Created by Scala on 13.11.2016.
  */
@@ -9,8 +14,9 @@ public class Driver {
     private String driverStatus;
     private static final String TYPE_OF_DRIVER_STATUS_FREE = "Свободен";
     private static final String TYPE_OF_DRIVER_STATUS_RESERVED = "Занят";
+  //  private MyResourseBundle myBundle = new MyResourseBundle(MyLocale.getLocale(MyLocale.findLocale()));
 
-    public Driver (String name, String telephone, String driverStatus){
+    public Driver (String name, String telephone, String driverStatus) throws IOException {
         this.name = name;
         this.telephone = telephone;
         this.setDriverStatus(driverStatus);
@@ -50,7 +56,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return this.name + ", телефон для связи: " + this.telephone;
+        return this.name + ", " + /*myBundle.getValue("telephone") +*/": " + this.telephone;
     }
 
 
