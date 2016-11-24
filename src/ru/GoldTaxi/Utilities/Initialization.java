@@ -3,6 +3,7 @@ package ru.GoldTaxi.Utilities;
 import ru.GoldTaxi.Entities.Car;
 import ru.GoldTaxi.Entities.Driver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,21 +21,21 @@ public class Initialization {
         return instance;
     }
 
-    public static ArrayList<Car> initCarArray() {
+    public static ArrayList<Car> initCarArray() throws IOException {
         Random rdm = new Random();
         ArrayList<Car> carArray = new ArrayList<Car>();
         for (int i = 0; i < 10; i++) {
-            carArray.add(new Car("Автомобиль" + " " + (i+1), "AA " + rdm.nextInt(999) + " A 163",
+            carArray.add(new Car(MyResourseBundle.getBundle() + " " + (i+1), "AA " + rdm.nextInt(999) + " A 163",
                     rdm.nextBoolean(), rdm.nextBoolean(), Car.getTypeOfClassEconomic(),
                     Car.getTypeOfCarStatusFree()));
         }
         return carArray;
     }
 
-    public static ArrayList<Driver> initDriverArray() {
+    public static ArrayList<Driver> initDriverArray() throws IOException {
         ArrayList<Driver> driverArray = new ArrayList<Driver>();
         for (int i = 0; i < 10; i++) {
-            driverArray.add(new Driver("Водитель" + " " + (i+1), "884825050" + i,Driver.getTypeOfDriverStatusFree()));
+            driverArray.add(new Driver(MyResourseBundle.getBundle() + " " + (i+1), "884825050" + i,Driver.getTypeOfDriverStatusFree()));
         }
         return driverArray;
     }
