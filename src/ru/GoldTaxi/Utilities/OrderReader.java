@@ -6,15 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static ru.GoldTaxi.Utilities.MyLocale.*;
-
 /**
  * Created by Scala on 13.11.2016.
  */
 public class OrderReader {
 
     private static OrderReader instance;
-    MyResourseBundle myBundle = new MyResourseBundle(getLocale(findLocale()));
+    //MyResourseBundle myBundle = new MyResourseBundle(MyLocale.l);
 
     public OrderReader() throws IOException {
     }
@@ -27,7 +25,8 @@ public class OrderReader {
         return instance;
     }
 
-    public  Order orderRead() throws IOException {
+    public Order orderRead() throws IOException {
+        System.out.println(MyResourseBundle.getBundle().getString("order"));
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Order order = null;
         boolean isCorrectOrder = false;
@@ -46,11 +45,11 @@ public class OrderReader {
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println(myBundle.getValue("appointed"));
+                    System.out.println(MyResourseBundle.getBundle().getString("incorrect"));
                 }
             }
                      else {
-                            System.out.println(myBundle.getValue("appointed"));
+                            System.out.println(MyResourseBundle.getBundle().getString("incorrect"));
                         }
                         if (order != null) isCorrectOrder = true;
                     }

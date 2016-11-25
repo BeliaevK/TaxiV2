@@ -1,10 +1,13 @@
 package ru.GoldTaxi.Entities;
 
+import ru.GoldTaxi.Utilities.MyResourseBundle;
+
 /**
  * Created by Scala on 13.11.2016.
  */
 public class Car {
     private String carMark;
+    private Driver carDriver;
     private String carNumber;
     private boolean babySeat;
     private boolean smoking;
@@ -12,11 +15,12 @@ public class Car {
     private String carStatus;
     private static final int TYPE_OF_CLASS_ECONOMIC = 0;
     private static final int TYPE_OF_CLASS_BUSYNESS = 1;
-    private static final String TYPE_OF_CAR_STATUS_FREE = "Свободен";
-    private static final String TYPE_OF_CAR_STATUS_RESERVED = "Занят";
+    private static final String TYPE_OF_STATUS_FREE = "Свободен";
+    private static final String TYPE_OF_STATUS_RESERVED = "Занят";
 
-    public Car(String carMark, String carNumber, boolean babySeat, boolean smoking, int carClass, String carStatus) {
+    public Car(String carMark, Driver carDriver, String carNumber, boolean babySeat, boolean smoking, int carClass, String carStatus) {
         this.carMark = carMark;
+        this.carDriver = carDriver;
         this.carNumber = carNumber;
         this.babySeat = babySeat;
         this.smoking = smoking;
@@ -33,14 +37,13 @@ public class Car {
         return TYPE_OF_CLASS_BUSYNESS;
     }
 
-    public static String getTypeOfCarStatusFree() {
-        return TYPE_OF_CAR_STATUS_FREE;
+    public static String getTypeOfStatusFree() {
+        return TYPE_OF_STATUS_FREE;
     }
 
-    public static String getTypeOfCarStatusReserved() {
-        return TYPE_OF_CAR_STATUS_RESERVED;
+    public static String getTypeOfStatusReserved() {
+        return TYPE_OF_STATUS_RESERVED;
     }
-
 
     public String getCarMark() {
         return carMark;
@@ -48,6 +51,14 @@ public class Car {
 
     public void setCarMark(String carMark) {
         this.carMark = carMark;
+    }
+
+    public Driver getCarDriver() {
+        return carDriver;
+    }
+
+    public void setCarDriver(Driver carDriver) {
+        this.carDriver = carDriver;
     }
 
     public String getCarNumber() {
@@ -92,6 +103,8 @@ public class Car {
 
     @Override
     public String toString() {
-        return this.carMark + ", номер " + this.carNumber;
+        return this.carMark  + ", " + MyResourseBundle.getBundle().getString("carnumber") + ": " + this.carNumber+ ", "
+                + MyResourseBundle.getBundle().getString("driver") + ": "  + this.carDriver.getName() + ", " +
+                MyResourseBundle.getBundle().getString("telephone") + ": " + this.carDriver.getTelephone() + ".";
     }
 }

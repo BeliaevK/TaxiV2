@@ -26,20 +26,18 @@ public class Initialization {
 
     public ArrayList<Car> initCarArray() throws IOException {
         Random rdm = new Random();
+        ArrayList<Driver> driverArray = new ArrayList<Driver>();
+        for (int i = 0; i < 10; i++) {
+            driverArray.add(new Driver(MyResourseBundle.getBundle().getString("driver") + " " + (i+1), "884825050" + i));
+        }
         ArrayList<Car> carArray = new ArrayList<Car>();
         for (int i = 0; i < 10; i++) {
-            carArray.add(new Car("Автомобиль " + (i+1), "AA " + rdm.nextInt(999) + " A 163",
+            carArray.add(new Car(MyResourseBundle.getBundle().getString("car") + " " + (i+1), driverArray.get(i), "AA " + rdm.nextInt(999) + " A 163",
                     rdm.nextBoolean(), rdm.nextBoolean(), Car.getTypeOfClassEconomic(),
-                    Car.getTypeOfCarStatusFree()));
+                    Car.getTypeOfStatusFree()));
         }
         return carArray;
     }
 
-    public ArrayList<Driver> initDriverArray() throws IOException {
-        ArrayList<Driver> driverArray = new ArrayList<Driver>();
-        for (int i = 0; i < 10; i++) {
-            driverArray.add(new Driver("Водитель " + (i+1), "884825050" + i,Driver.getTypeOfDriverStatusFree()));
-        }
-        return driverArray;
-    }
+
 }

@@ -24,7 +24,7 @@ public class CarSearch {
         for (Car car : carArrayList) {
             if (CarSearch.compareOrderToCar(car, order)) {
                 reservedCar = car;
-                reservedCar.setCarStatus(Car.getTypeOfCarStatusReserved());
+                reservedCar.setCarStatus(Car.getTypeOfStatusReserved());
                 order.setCarReserver(reservedCar);
                 break;
             }
@@ -38,7 +38,7 @@ public class CarSearch {
 
     private static boolean compareOrderToCar(Car car, Order order) {
         boolean isSuitCar = true;
-        if (Car.getTypeOfCarStatusReserved().equals(car.getCarStatus()) | !(car.isBabySeat() == order.isNeedBabySeat()) |
+        if (Car.getTypeOfStatusReserved().equals(car.getCarStatus()) | !(car.isBabySeat() == order.isNeedBabySeat()) |
                 !(car.isSmoking() == order.isNeedSmoking()) | !(car.getCarClass() == order.getNeedCarClass())) isSuitCar = false;
         return isSuitCar;
     }

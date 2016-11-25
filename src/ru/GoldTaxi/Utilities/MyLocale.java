@@ -10,21 +10,43 @@ import java.util.Locale;
  */
 public class MyLocale {
 
-    public static String findLocale() throws IOException {
-        System.out.println("Select your language: 'en' or 'ru'");
+    public static Locale getLocale() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String s =reader.readLine();
-        return s;
-    }
-
-    public static Locale getLocale(String s) throws IOException {
-        if (s.equals("en"))
-            return new Locale("en","Us");
-        else if (s.equals("ru")) {
-            return new Locale("en", "Us");
+        Locale locale = null;
+        boolean isCorrectLocale = false;
+        while (!isCorrectLocale) {
+            System.out.println("Select your language: 'en' or 'ru'");
+        String s = reader.readLine();
+            if (!checkIsCorrectLocale(s)) {
+                switch (s) {
+                    case "ru":
+                        locale = new Locale("ru", "Ru");
+                        break;
+                    case "en":
+                        locale = new Locale("en", "Us");
+                        break;
+                }
+            }
+                if (locale != null) isCorrectLocale = true;
         }
-    return null;
+        return locale;
     }
 
+        public static Locale l;
 
-}
+        static {
+            try {
+                l = getLocale();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    private static boolean checkIsCorrectLocale(String s) {
+        boolean isCorrectLocale = true;
+        if (s.equals("ru") || s.equals("en")) isCorrectLocale = false;
+
+        return isCorrectLocale;
+    }
+    }
+
